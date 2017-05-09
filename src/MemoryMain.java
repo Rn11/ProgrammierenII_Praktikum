@@ -35,7 +35,7 @@ public class MemoryMain {
 		button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// aendere hintergrundfarbe
-				button1.setBackground(Color.green);
+				button1.setBackground(Color.red);
 			}
 		});
 
