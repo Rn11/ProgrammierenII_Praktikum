@@ -19,7 +19,7 @@ public class MemoryMain {
 		screen.setVisible(true);
 
 		// 2x2 Raster erstellen
-		screen.setLayout(new GridLayout(2, 2));
+		screen.setLayout(new GridLayout(2, 2, 15, 15));
 
 		// buttons erstellen
 		JButton button1 = new JButton("1");
@@ -50,12 +50,11 @@ public class MemoryMain {
 		// event listener
 		button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button1.setIcon(bier);
 				// sobald eine action auf dem button performed wurde, bekommt
 				// der Button ein Bild (hier: Bier)
+				button1.setIcon(bier);
 				// Der Text des Buttons (die 1) verschwindet
 				button1.setText("");
-
 			}
 		});
 
@@ -63,7 +62,6 @@ public class MemoryMain {
 			public void actionPerformed(ActionEvent e) {
 				button2.setIcon(kaffee);
 				button2.setText("");
-
 			}
 		});
 
@@ -71,7 +69,6 @@ public class MemoryMain {
 			public void actionPerformed(ActionEvent e) {
 				button3.setIcon(kaffee);
 				button3.setText("");
-
 			}
 		});
 
@@ -81,7 +78,6 @@ public class MemoryMain {
 				button4.setText("");
 			}
 		});
-
 	}
 
 	/*
