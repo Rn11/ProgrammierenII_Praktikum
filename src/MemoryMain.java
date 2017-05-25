@@ -19,7 +19,7 @@ public class MemoryMain {
 		screen.setVisible(true);
 
 		// 2x2 Raster erstellen
-		screen.setLayout(new GridLayout(2, 2, 15, 15));
+		screen.setLayout(new GridLayout(2, 2, 10, 10));
 
 		// buttons erstellen
 		JButton button1 = new JButton("1");
