@@ -32,15 +32,6 @@ public class Spiel {
 		ImageIcon kaffee = new ImageIcon("bilder/kaffee.png");
 		ImageIcon bier = new ImageIcon("bilder/bier.png");
 
-		// Ersetze das image mit einer skalierten Instanz des Bildes,
-		// dessen Groesse sich nach dem Button richtet
-		// Zu beachten ist hierbei, dass es egal ist, von welchem Button die
-		// Groesse abgefragt wird,
-		// da alle Buttons gleich gross sind
-		bier.setImage(bier.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_DEFAULT));
-		kaffee.setImage(
-				kaffee.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_DEFAULT));
-
 		// event listener
 		button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -72,12 +63,27 @@ public class Spiel {
 				button4.setText("");
 			}
 		});
+
+		// ComponentListener welcher auf das Resize-Event reagiert
+		// Bilder werden nun beim aendern der Fenstergroesse skaliert
+		screen.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				// Ersetze das image mit einer skalierten Instanz des Bildes,
+				// dessen Groesse sich nach dem Button richtet
+				// Zu beachten ist hierbei, dass es egal ist, von welchem Button
+				// die Groesse abgefragt wird,
+				// da alle Buttons gleich gross sind
+				bier.setImage(bier.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(),
+						Image.SCALE_DEFAULT));
+				kaffee.setImage(kaffee.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(),
+						Image.SCALE_DEFAULT));
+			}
+		});
 	}
 
 	/*
 	 * Known bugs: - Buttons werden nicht richtig resized --> ggf. ist ein teil
-	 * des buttons sichtbar - Groesse der Bilder werden erst nach klicken
-	 * angezeigt --> die aktualisierung muss beim resize event des fensters
-	 * erfolgen
+	 * des buttons sichtbar
 	 */
 }
