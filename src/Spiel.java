@@ -34,7 +34,6 @@ public class Spiel {
 
 		// Ersetze das image mit einer skalierten Instanz des Bildes,
 		// dessen Groesse sich nach dem Button richtet
-		//
 		// Zu beachten ist hierbei, dass es egal ist, von welchem Button die
 		// Groesse abgefragt wird,
 		// da alle Buttons gleich gross sind

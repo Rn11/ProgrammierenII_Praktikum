@@ -37,8 +37,17 @@ public class Menue {
 
 		btnEinzelspieler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Schliesse Menue
+				screen.dispose();
 				// Starte Einzelspieler
-				Spiel.prepareGUI();
+				Spiel.prepareGUI();	
+			}
+		});
+		
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Schliesse Applikation
+				System.exit(0);
 			}
 		});
 	}
