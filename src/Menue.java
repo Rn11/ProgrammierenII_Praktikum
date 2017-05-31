@@ -15,12 +15,14 @@ public class Menue {
 		screen = new JFrame("Memory");
 		screen.setLocationRelativeTo(null);
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		screen.setSize(200, 200);
+		screen.setSize(450, 450);
 		screen.setVisible(true);
 		screen.setLayout(new GridBagLayout());
 
 		JButton btnEinzelspieler = new JButton("Einzelspieler");
 		JButton btnMehrspieler = new JButton("Mehrspieler");
+		JButton btnCredits = new JButton("Credits");
+		JButton btnEinstellungen = new JButton ("Einstellungen");
 		JButton btnExit = new JButton("Verlassen");
 
 		GridBagConstraints c = new GridBagConstraints();
@@ -33,6 +35,10 @@ public class Menue {
 		c.gridy = 1;
 		screen.getContentPane().add(btnMehrspieler, c);
 		c.gridy = 2;
+		screen.getContentPane().add(btnEinstellungen, c);
+		c.gridy =3;
+		screen.getContentPane().add(btnCredits, c);
+		c.gridy =4;
 		screen.getContentPane().add(btnExit, c);
 
 		btnEinzelspieler.addActionListener(new ActionListener() {
