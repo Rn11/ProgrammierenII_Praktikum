@@ -56,5 +56,11 @@ public class Menue {
 				System.exit(0);
 			}
 		});
+		btnCredits.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Schliesse Applikation
+				credits.main(null);
+			}
+		});
 	}
 }
