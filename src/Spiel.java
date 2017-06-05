@@ -35,10 +35,25 @@ public class Spiel {
 		// event listener
 		button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// sobald eine action auf dem button performed wurde, bekommt
-				// der Button ein Bild (hier: Bier)
+
+				// neuer Thread von SleepThread
+				SleepThread S1 = new SleepThread("TiredThread");
+				S1.start();
+				System.out.println("Ist gestartet");
+
+				try {
+					// eigentlich sollte hier gewartet werden und das bild anschlieﬂend entfernt werden
+					// ?
+					S1.join();
+					System.out.println("asdasd");
+
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					System.out.println("123");
+					e1.printStackTrace();
+				}
+
 				button1.setIcon(bier);
-				// Der Text des Buttons (die 1) verschwindet
 				button1.setText("");
 			}
 		});
@@ -74,10 +89,10 @@ public class Spiel {
 				// Zu beachten ist hierbei, dass es egal ist, von welchem Button
 				// die Groesse abgefragt wird,
 				// da alle Buttons gleich gross sind
-				bier.setImage(bier.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(),
-						Image.SCALE_DEFAULT));
-				kaffee.setImage(kaffee.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(),
-						Image.SCALE_DEFAULT));
+				bier.setImage(
+						bier.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));
+				kaffee.setImage(
+						kaffee.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));
 			}
 		});
 	}
