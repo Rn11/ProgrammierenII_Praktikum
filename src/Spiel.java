@@ -10,28 +10,52 @@ public class Spiel {
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// screengroesse 600x600
-		screen.setSize(600, 600);
-		screen.setVisible(true);
+		screen.setSize(800, 800);
 
 		// 2x2 Raster erstellen
-		screen.setLayout(new GridLayout(2, 2, 10, 10));
+		screen.setLayout(new GridLayout(4, 4, 10, 10));
 
 		// buttons erstellen
 		JButton button1 = new JButton("1");
 		JButton button2 = new JButton("2");
 		JButton button3 = new JButton("3");
 		JButton button4 = new JButton("4");
+		JButton button5 = new JButton("5");
+		JButton button6 = new JButton("6");
+		JButton button7 = new JButton("7");
+		JButton button8 = new JButton("8");
+		JButton button9 = new JButton("9");
+		JButton button10 = new JButton("10");
+		JButton button11 = new JButton("11");
+		JButton button12 = new JButton("12");
+		JButton button13 = new JButton("13");
+		JButton button14 = new JButton("14");
+		JButton button15 = new JButton("15");
+		JButton button16 = new JButton("16");
 
 		screen.getContentPane().add(button1);
 		screen.getContentPane().add(button2);
 		screen.getContentPane().add(button3);
 		screen.getContentPane().add(button4);
+		screen.getContentPane().add(button5);
+		screen.getContentPane().add(button6);
+		screen.getContentPane().add(button7);
+		screen.getContentPane().add(button8);
+		screen.getContentPane().add(button9);
+		screen.getContentPane().add(button10);
+		screen.getContentPane().add(button11);
+		screen.getContentPane().add(button12);
+		screen.getContentPane().add(button13);
+		screen.getContentPane().add(button14);
+		screen.getContentPane().add(button15);
+		screen.getContentPane().add(button16);
+
+		screen.setVisible(true);
 
 		// Icons werden nun seperat angelegt, damit bei den action listenern die
 		// icons per Referenz manipuliert werden koennen
-		ImageIcon kaffee = new ImageIcon("bilder/kaffee.png");
-		ImageIcon bier = new ImageIcon("bilder/bier.png");
-
+		ImageIcon kaffee = new ImageIcon("bilder/5.png");
+		ImageIcon bier = new ImageIcon("bilder/2.png");
 		// event listener
 		button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -42,8 +66,8 @@ public class Spiel {
 				System.out.println("Ist gestartet");
 
 				try {
-					// eigentlich sollte hier gewartet werden und das bild anschließend entfernt werden
-					// ?
+					// eigentlich sollte hier gewartet werden und das bild
+					// anschließend entfernt werden
 					S1.join();
 					System.out.println("asdasd");
 
@@ -96,9 +120,7 @@ public class Spiel {
 			}
 		});
 	}
-
 	/*
-	 * Known bugs: - Buttons werden nicht richtig resized --> ggf. ist ein teil
-	 * des buttons sichtbar
+	 * Known bugs: -
 	 */
 }

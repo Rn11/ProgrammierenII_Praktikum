@@ -16,7 +16,6 @@ public class Menue {
 		screen.setLocationRelativeTo(null);
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		screen.setSize(450, 450);
-		screen.setVisible(true);
 		screen.setLayout(new GridBagLayout());
 
 		JButton btnEinzelspieler = new JButton("Einzelspieler");
@@ -40,6 +39,8 @@ public class Menue {
 		screen.getContentPane().add(btnCredits, c);
 		c.gridy =4;
 		screen.getContentPane().add(btnExit, c);
+		screen.setVisible(true);
+
 
 		btnEinzelspieler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
