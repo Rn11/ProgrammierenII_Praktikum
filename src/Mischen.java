@@ -12,17 +12,23 @@ public class Mischen {
 		Random rn = new Random();
 		ArrayList<File> unsortiert = new ArrayList<File>();
 		ArrayList<File> bilder = new ArrayList<File>();
+		int position = 0;
 
-		File folder = new File("/bilder/");
+		File folder = new File("src/bilder/");
 
-		try (Stream<Path> filePathStream = Files.walk(Paths.get("/bilder/"))) {
+		try (Stream<Path> filePathStream = Files.walk(Paths.get("src/bilder/"))) {
 			filePathStream.forEach(filePath -> {
 				if (Files.isRegularFile(filePath)) {
-					System.out.println(filePath);
+					unsortiert.add(filePath.toFile());
 				}
 			});
 		}
-
+		
+		position = unsortiert.size();
+		for (int i = 0; i < position; i++) {
+			unsortiert.add(unsortiert.get(i));
+		}
+		
 		while (0 < unsortiert.size()) {
 			int random = rn.nextInt(unsortiert.size());
 			bilder.add(unsortiert.get(random));
