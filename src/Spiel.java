@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+
 import javax.swing.*;
 
 public class Spiel {
@@ -86,6 +88,12 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button2.setIcon(kaffee);
 				button2.setText("");
+				try {
+					Mischen.mischen();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 

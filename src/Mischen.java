@@ -1,18 +1,35 @@
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Mischen {
-	public static ArrayList<File> mischen() {
+	public static ArrayList<File> mischen() throws IOException {
 		Random rn = new Random();
 		ArrayList<File> unsortiert = new ArrayList<File>();
 		ArrayList<File> bilder = new ArrayList<File>();
-		
+
+		File folder = new File("/bilder/");
+
+		try (Stream<Path> filePathStream = Files.walk(Paths.get("/bilder/"))) {
+			filePathStream.forEach(filePath -> {
+				if (Files.isRegularFile(filePath)) {
+					System.out.println(filePath);
+				}
+			});
+		}
+
 		while (0 < unsortiert.size()) {
-			int random = rn.nextInt(unsortiert.size()); 
+			int random = rn.nextInt(unsortiert.size());
 			bilder.add(unsortiert.get(random));
 			unsortiert.remove(random);
 			unsortiert.trimToSize();
 		}
+
 		return bilder;
 	}
 }
