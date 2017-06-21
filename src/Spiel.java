@@ -466,7 +466,7 @@ public class Spiel {
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button18.path = gemischt.get(6).toString();
+					path = button18.path = gemischt.get(17).toString();
 					tmpID_a = button18.id;
 					button18.setEnabled(false);
 				}
