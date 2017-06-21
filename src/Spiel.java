@@ -563,6 +563,7 @@ public class Spiel {
 			}
 		});
 
+		
 		button24.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				button24.setIcon(bild24);
