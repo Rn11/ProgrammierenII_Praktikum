@@ -8,8 +8,39 @@ import javax.swing.*;
 
 public class Spiel {
 	static JFrame screen;
+	static ArrayList<File> gemischt = new ArrayList<File>();
+	static ArrayList<JButton> buttons = new ArrayList<JButton>();
+	static int tmpID_a = 0;
+	static int tmpID_b = 0;
+	static int klick = 0;
+	static String path = "";
+	public static Icon defaultIcon;
+
+	public static boolean checkCards(String path1, String path2) {
+
+		if (path1 == path2) {
+			System.out.println("Ein Päärchen, schön!");
+			klick = 0;
+		} else {
+			klick = 0;
+			t.start();
+			return true;
+		}
+		return false;
+	}
+
+	static Timer t = new Timer(750, new ActionListener() {
+		public void actionPerformed(ActionEvent ae) {
+			System.out.println("Pech gehabt...");
+			buttons.get(tmpID_a).setIcon(null);
+			buttons.get(tmpID_b).setIcon(null);
+			buttons.get(tmpID_a).setEnabled(true);
+			t.stop();
+		}
+	});
 
 	static void prepareGUI() {
+
 		screen = new JFrame("Memory");
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -20,59 +51,62 @@ public class Spiel {
 		screen.setLayout(new GridLayout(4, 4, 10, 10));
 
 		// buttons erstellen
-		JButton button1 = new JButton("1");
-		JButton button2 = new JButton("2");
-		JButton button3 = new JButton("3");
-		JButton button4 = new JButton("4");
-		JButton button5 = new JButton("5");
-		JButton button6 = new JButton("6");
-		JButton button7 = new JButton("7");
-		JButton button8 = new JButton("8");
-		JButton button9 = new JButton("9");
-		JButton button10 = new JButton("10");
-		JButton button11 = new JButton("11");
-		JButton button12 = new JButton("12");
-		JButton button13 = new JButton("13");
-		JButton button14 = new JButton("14");
-		JButton button15 = new JButton("15");
-		JButton button16 = new JButton("16");
-		JButton button17 = new JButton("17");
-		JButton button18 = new JButton("18");
-		JButton button19 = new JButton("19");
-		JButton button20 = new JButton("20");
-		JButton button21 = new JButton("21");
-		JButton button22 = new JButton("22");
-		JButton button23 = new JButton("23");
-		JButton button24 = new JButton("24");
+		Button button1 = new Button(0);
+		Button button2 = new Button(1);
+		Button button3 = new Button(2);
+		Button button4 = new Button(3);
+		Button button5 = new Button(4);
+		Button button6 = new Button(5);
+		Button button7 = new Button(6);
+		Button button8 = new Button(7);
+		Button button9 = new Button(8);
+		Button button10 = new Button(9);
+		Button button11 = new Button(10);
+		Button button12 = new Button(11);
+		Button button13 = new Button(12);
+		Button button14 = new Button(13);
+		Button button15 = new Button(14);
+		Button button16 = new Button(15);
+		Button button17 = new Button(16);
+		Button button18 = new Button(17);
+		Button button19 = new Button(18);
+		Button button20 = new Button(19);
+		Button button21 = new Button(20);
+		Button button22 = new Button(21);
+		Button button23 = new Button(22);
+		Button button24 = new Button(23);
 
-		screen.getContentPane().add(button1);
-		screen.getContentPane().add(button2);
-		screen.getContentPane().add(button3);
-		screen.getContentPane().add(button4);
-		screen.getContentPane().add(button5);
-		screen.getContentPane().add(button6);
-		screen.getContentPane().add(button7);
-		screen.getContentPane().add(button8);
-		screen.getContentPane().add(button9);
-		screen.getContentPane().add(button10);
-		screen.getContentPane().add(button11);
-		screen.getContentPane().add(button12);
-		screen.getContentPane().add(button13);
-		screen.getContentPane().add(button14);
-		screen.getContentPane().add(button15);
-		screen.getContentPane().add(button16);
-		screen.getContentPane().add(button17);
-		screen.getContentPane().add(button18);
-		screen.getContentPane().add(button19);
-		screen.getContentPane().add(button20);
-		screen.getContentPane().add(button21);
-		screen.getContentPane().add(button22);
-		screen.getContentPane().add(button23);
-		screen.getContentPane().add(button24);
+		buttons.add(button1);
+		buttons.add(button2);
+		buttons.add(button3);
+		buttons.add(button4);
+		buttons.add(button5);
+		buttons.add(button6);
+		buttons.add(button7);
+		buttons.add(button8);
+		buttons.add(button9);
+		buttons.add(button10);
+		buttons.add(button11);
+		buttons.add(button12);
+		buttons.add(button13);
+		buttons.add(button14);
+		buttons.add(button15);
+		buttons.add(button16);
+		buttons.add(button17);
+		buttons.add(button18);
+		buttons.add(button19);
+		buttons.add(button20);
+		buttons.add(button21);
+		buttons.add(button22);
+		buttons.add(button23);
+		buttons.add(button24);
+
+		for (int i = 0; i < 24; i++) {
+
+			screen.getContentPane().add(buttons.get(i));
+		}
 
 		screen.setVisible(true);
-
-		ArrayList<File> gemischt = new ArrayList<File>();
 		try {
 
 			gemischt = Mischen.mischen();
@@ -111,9 +145,22 @@ public class Spiel {
 
 		// event listener
 		button1.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				button1.setIcon(bild1);
+
 				button1.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button1.path = gemischt.get(0).toString(), path)) {
+						tmpID_b = button1.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button1.path = gemischt.get(0).toString();
+					tmpID_a = button1.id;
+					button1.setEnabled(false);
+				}
 			}
 		});
 
@@ -121,7 +168,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button2.setIcon(bild2);
 				button2.setText("");
-
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button2.path = gemischt.get(1).toString(), path)) {
+						tmpID_b = button2.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button2.path = gemischt.get(1).toString();
+					tmpID_a = button2.id;
+					button2.setEnabled(false);
+				}
 			}
 		});
 
@@ -129,6 +186,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button3.setIcon(bild3);
 				button3.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button3.path = gemischt.get(2).toString(), path)) {
+						tmpID_b = button3.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button3.path = gemischt.get(2).toString();
+					tmpID_a = button3.id;
+					button3.setEnabled(false);
+				}
 			}
 		});
 
@@ -136,6 +204,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button4.setIcon(bild4);
 				button4.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button4.path = gemischt.get(3).toString(), path)) {
+						tmpID_b = button4.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button4.path = gemischt.get(3).toString();
+					tmpID_a = button4.id;
+					button4.setEnabled(false);
+				}
 			}
 		});
 
@@ -143,6 +222,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button5.setIcon(bild5);
 				button5.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button5.path = gemischt.get(4).toString(), path)) {
+						tmpID_b = button5.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button5.path = gemischt.get(4).toString();
+					tmpID_a = button5.id;
+					button5.setEnabled(false);
+				}
 			}
 		});
 
@@ -150,6 +240,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button6.setIcon(bild6);
 				button6.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button6.path = gemischt.get(5).toString(), path)) {
+						tmpID_b = button6.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button6.path = gemischt.get(5).toString();
+					tmpID_a = button6.id;
+					button6.setEnabled(false);
+				}
 			}
 		});
 
@@ -157,6 +258,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button7.setIcon(bild7);
 				button7.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button7.path = gemischt.get(6).toString(), path)) {
+						tmpID_b = button7.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button7.path = gemischt.get(6).toString();
+					tmpID_a = button7.id;
+					button7.setEnabled(false);
+				}
 			}
 		});
 
@@ -164,6 +276,18 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button8.setIcon(bild8);
 				button8.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button8.path = gemischt.get(7).toString(), path)) {
+						tmpID_b = button8.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button8.path = gemischt.get(7).toString();
+					tmpID_a = button8.id;
+					button8.setEnabled(false);
+				}
+
 			}
 		});
 
@@ -171,6 +295,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button9.setIcon(bild9);
 				button9.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button9.path = gemischt.get(8).toString(), path)) {
+						tmpID_b = button9.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button9.path = gemischt.get(8).toString();
+					tmpID_a = button9.id;
+					button9.setEnabled(false);
+				}
 			}
 		});
 
@@ -178,6 +313,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button10.setIcon(bild10);
 				button10.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button10.path = gemischt.get(9).toString(), path)) {
+						tmpID_b = button10.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button10.path = gemischt.get(9).toString();
+					tmpID_a = button10.id;
+					button10.setEnabled(false);
+				}
 			}
 		});
 
@@ -185,13 +331,36 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button11.setIcon(bild11);
 				button11.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button11.path = gemischt.get(10).toString(), path)) {
+						tmpID_b = button11.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button11.path = gemischt.get(10).toString();
+					tmpID_a = button11.id;
+					button11.setEnabled(false);
+				}
 			}
+
 		});
 
 		button12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				button12.setIcon(bild12);
 				button12.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button12.path = gemischt.get(11).toString(), path)) {
+						tmpID_b = button12.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button12.path = gemischt.get(11).toString();
+					tmpID_a = button12.id;
+					button12.setEnabled(false);
+				}
 			}
 		});
 
@@ -199,6 +368,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button13.setIcon(bild13);
 				button13.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button13.path = gemischt.get(12).toString(), path)) {
+						tmpID_b = button13.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button13.path = gemischt.get(12).toString();
+					tmpID_a = button13.id;
+					button13.setEnabled(false);
+				}
 
 			}
 		});
@@ -207,6 +387,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button14.setIcon(bild14);
 				button14.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button14.path = gemischt.get(13).toString(), path)) {
+						tmpID_b = button14.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button14.path = gemischt.get(13).toString();
+					tmpID_a = button14.id;
+					button14.setEnabled(false);
+				}
 			}
 		});
 
@@ -214,13 +405,35 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button15.setIcon(bild15);
 				button15.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button15.path = gemischt.get(14).toString(), path)) {
+						tmpID_b = button15.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button15.path = gemischt.get(14).toString();
+					tmpID_a = button15.id;
+					button15.setEnabled(false);
+				}
 			}
 		});
 
 		button16.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				button16.setIcon(bild16);
-				button5.setText("");
+				button16.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button16.path = gemischt.get(15).toString(), path)) {
+						tmpID_b = button16.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button16.path = gemischt.get(15).toString();
+					tmpID_a = button16.id;
+					button16.setEnabled(false);
+				}
 			}
 		});
 
@@ -228,6 +441,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button17.setIcon(bild17);
 				button17.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button17.path = gemischt.get(16).toString(), path)) {
+						tmpID_b = button17.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button17.path = gemischt.get(16).toString();
+					tmpID_a = button17.id;
+					button17.setEnabled(false);
+				}
 			}
 		});
 
@@ -235,6 +459,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button18.setIcon(bild18);
 				button18.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button18.path = gemischt.get(17).toString(), path)) {
+						tmpID_b = button18.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button18.path = gemischt.get(6).toString();
+					tmpID_a = button18.id;
+					button18.setEnabled(false);
+				}
 			}
 		});
 
@@ -242,6 +477,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button19.setIcon(bild19);
 				button19.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button19.path = gemischt.get(18).toString(), path)) {
+						tmpID_b = button19.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button19.path = gemischt.get(18).toString();
+					tmpID_a = button19.id;
+					button19.setEnabled(false);
+				}
 			}
 		});
 
@@ -249,6 +495,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button20.setIcon(bild20);
 				button20.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button20.path = gemischt.get(19).toString(), path)) {
+						tmpID_b = button20.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button20.path = gemischt.get(19).toString();
+					tmpID_a = button20.id;
+					button20.setEnabled(false);
+				}
 			}
 		});
 
@@ -256,6 +513,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button21.setIcon(bild21);
 				button21.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button21.path = gemischt.get(20).toString(), path)) {
+						tmpID_b = button21.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button21.path = gemischt.get(20).toString();
+					tmpID_a = button21.id;
+					button21.setEnabled(false);
+				}
 			}
 		});
 
@@ -263,6 +531,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button22.setIcon(bild22);
 				button22.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button22.path = gemischt.get(21).toString(), path)) {
+						tmpID_b = button22.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button22.path = gemischt.get(21).toString();
+					tmpID_a = button22.id;
+					button22.setEnabled(false);
+				}
 			}
 		});
 
@@ -270,6 +549,17 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button23.setIcon(bild23);
 				button23.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button23.path = gemischt.get(22).toString(), path)) {
+						tmpID_b = button23.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button23.path = gemischt.get(22).toString();
+					tmpID_a = button23.id;
+					button23.setEnabled(false);
+				}
 			}
 		});
 
@@ -277,48 +567,19 @@ public class Spiel {
 			public void actionPerformed(ActionEvent e) {
 				button24.setIcon(bild24);
 				button24.setText("");
+				klick++;
+				if (klick == 2) {
+					if (checkCards(button24.path = gemischt.get(23).toString(), path)) {
+						tmpID_b = button24.id;
+						t.start();
+					}
+				} else if (klick == 1) {
+					path = button24.path = gemischt.get(23).toString();
+					tmpID_a = button24.id;
+					button24.setEnabled(false);
+				}
 			}
 		});
-		// ComponentListener welcher auf das Resize-Event reagiert
-		// Bilder werden nun beim aendern der Fenstergroesse skaliert
-		screen.addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentResized(ComponentEvent e) {
-				// Ersetze das image mit einer skalierten Instanz des Bildes,
-				// dessen Groesse sich nach dem Button richtet
-				// Zu beachten ist hierbei, dass es egal ist, von welchem Button
-				// die Groesse abgefragt wird,
-				// da alle Buttons gleich gross sind
-			/*	auto.setImage(
-						auto.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));
-				ball.setImage(
-						ball.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));
-				weizen.setImage(
-						weizen.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));
-				fler.setImage(
-						fler.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));
-				kaffee.setImage(
-						kaffee.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));
-				kaffee.setImage(
-						kaffee.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));
-				marlene.setImage(marlene.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(),
-						Image.SCALE_FAST));
-				zebras.setImage(
-						zebras.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));
-				pils.setImage(
-						pils.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));
-				maske.setImage(
-						maske.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));
-				stop.setImage(
-						stop.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));
-				katze.setImage(
-						katze.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));
-				kreuz.setImage(
-						kreuz.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST));*/
-			}
-		});
+
 	}
-	/*
-	 * Known bugs: neuen Bilder werden nicht angezeigt
-	 */
 }
