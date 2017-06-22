@@ -8,13 +8,19 @@ import javax.swing.*;
 
 public class Spiel {
 	static JFrame screen;
+	// ArrayList vom Typ file, beinhaltet die Pfade zu den Dateien zu den Bildern
+	// Wird benutzt, um Bilder zu vergleichen
 	static ArrayList<File> gemischt = new ArrayList<File>();
+	// ArrayList vom Typ JButton, beinhaltet alle JButtons
 	static ArrayList<JButton> buttons = new ArrayList<JButton>();
+	// ArrayList vom Typ ImageIcon, beinhaltet alle Bilder (zum Skalieren mithilfe einer for-Schleife)
+	static ArrayList<ImageIcon> bilder = new ArrayList<ImageIcon>();
+	// Zwischenspeicher für IDs
 	static int tmpID_a = 0;
 	static int tmpID_b = 0;
+	// Zaehlervariable fuer Klicks
 	static int klick = 0;
 	static String path = "";
-	public static Icon defaultIcon;
 
 	public static boolean checkCards(String path1, String path2) {
 
@@ -85,6 +91,31 @@ public class Spiel {
 		ImageIcon bild22 = new ImageIcon(gemischt.get(21).toString());
 		ImageIcon bild23 = new ImageIcon(gemischt.get(22).toString());
 		ImageIcon bild24 = new ImageIcon(gemischt.get(23).toString());
+		
+		bilder.add(bild1);
+		bilder.add(bild2);
+		bilder.add(bild3);
+		bilder.add(bild4);
+		bilder.add(bild5);
+		bilder.add(bild6);
+		bilder.add(bild7);
+		bilder.add(bild8);
+		bilder.add(bild9);
+		bilder.add(bild10);
+		bilder.add(bild11);
+		bilder.add(bild12);
+		bilder.add(bild13);
+		bilder.add(bild14);
+		bilder.add(bild15);
+		bilder.add(bild16);
+		bilder.add(bild17);
+		bilder.add(bild18);
+		bilder.add(bild19);
+		bilder.add(bild20);
+		bilder.add(bild21);
+		bilder.add(bild22);
+		bilder.add(bild23);
+		bilder.add(bild24);
 
 		// buttons erstellen
 		Button button1 = new Button(0, gemischt.get(0).toString());
@@ -582,5 +613,22 @@ public class Spiel {
 			}
 		});
 
+		// ComponentListener welcher auf das Resize-Event reagiert
+		// Bilder werden nun beim aendern der Fenstergroesse skaliert
+		screen.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				// Ersetze das image mit einer skalierten Instanz des Bildes,
+				// dessen Groesse sich nach dem Button richtet
+				// Zu beachten ist hierbei, dass es egal ist, von welchem Button
+				// die Groesse abgefragt wird,
+				// da alle Buttons gleich gross sind
+				for (int i = 0; i < gemischt.size(); i++){
+					ImageIcon tmpIcon = new ImageIcon(gemischt.get(i).toString());
+					tmpIcon.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST);
+					bilder.set(i, tmpIcon);
+				}
+			}
+		});
 	}
 }

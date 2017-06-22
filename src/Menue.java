@@ -3,7 +3,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -78,13 +77,14 @@ public class Menue {
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Schliesse Applikation
+				screen.dispose();
 				System.exit(0);
 			}
 		});
 		btnCredits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Schliesse Applikation
-				credits.main(null);
+				// Oeffne credits
+				Credits.gui();
 			}
 		});
 		btnEinstellungen.addActionListener(new ActionListener() {
