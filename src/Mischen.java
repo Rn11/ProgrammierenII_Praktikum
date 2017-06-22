@@ -9,46 +9,40 @@ import java.util.stream.Stream;
 
 public class Mischen {
 	public static ArrayList<File> mischen() throws IOException {
+		// Random integer wird benoetigt
 		Random rn = new Random();
-		ArrayList<File> unsortiert = new ArrayList<File>();
-		ArrayList<File> bilder = new ArrayList<File>();
+		// ArrayList vom Typ File welches die eingelesenen Pfade der Bilder
+		// beinhaltet
+		ArrayList<File> eingelesen = new ArrayList<File>();
+		// ArrayList vom Typ File welches die gemischten Pfade der Bilder
+		// beinhaltet
+		ArrayList<File> gemischt = new ArrayList<File>();
 		int position = 0;
 
-		File folder = new File("src/bilder/");
-
+		// Bilder werden eingelesen
 		try (Stream<Path> filePathStream = Files.walk(Paths.get("src/bilder/"))) {
 			filePathStream.forEach(filePath -> {
 				if (Files.isRegularFile(filePath)) {
-					unsortiert.add(filePath.toFile());
+					eingelesen.add(filePath.toFile());
 				}
 			});
 		}
-		
-		position = unsortiert.size();
+
+		// Bilder werden aus der ArrayList 'eingelesen' hinten an 'eingelesen'
+		// angefuegt
+		position = eingelesen.size();
 		for (int i = 0; i < position; i++) {
-			unsortiert.add(unsortiert.get(i));
-		}
-		
-		while (0 < unsortiert.size()) {
-			int random = rn.nextInt(unsortiert.size());
-			bilder.add(unsortiert.get(random));
-			unsortiert.remove(random);
-			unsortiert.trimToSize();
+			eingelesen.add(eingelesen.get(i));
 		}
 
-		return bilder;
+		// Mische Eintraege
+		while (0 < eingelesen.size()) {
+			int random = rn.nextInt(eingelesen.size());
+			gemischt.add(eingelesen.get(random));
+			eingelesen.remove(random);
+			eingelesen.trimToSize();
+		}
+
+		return gemischt;
 	}
 }
-/*
- * import java.io.File; import java.util.ArrayList;
- * 
- * public class Mischen { public static ArrayList<File> getFiles(File dir) {
- * File[] bilder = dir.listFiles(); ArrayList<File> matches = new
- * ArrayList<File>(); if (bilder != null) { for (int i = 0; i < bilder.length;
- * i++) { if (bilder[i].isDirectory()) {
- * System.out.println(bilder[i].getAbsolutePath());
- * matches.addAll(getFiles(bilder[i])); } else { matches.add(bilder[i]); } } }
- * return matches; } } arraylist(bild), wird 2x durchlaufen. beim 1. mal
- * verzeichnisse hinzufügen, beim 2. mal position zufällig setzen. danach
- * meinBild.sort(); ,
- */
