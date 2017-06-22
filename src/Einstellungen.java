@@ -62,12 +62,12 @@ public class Einstellungen {
 		eFenster.getContentPane().add(btnZurueck, c);
 
 		// positionierung des labes "txtValueH" (hoehe)
-		c.gridx = 3;
+		c.gridx = 1;
 		c.gridy = 0;
 		eFenster.getContentPane().add(txtValueH, c);
 
 		// positionierung des labes "txtValueB" (breite)
-		c.gridx = 3;
+		c.gridx = 1;
 		c.gridy = 1;
 		eFenster.getContentPane().add(txtValueB, c);
 
