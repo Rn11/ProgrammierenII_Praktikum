@@ -3,13 +3,35 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 // Klasse fuer das GUI des Hauptmenues
 public class Menue {
 	static JFrame screen;
+	
+	// aufloesung
+	// hoehe
+	private static int res_h = 768;
+	// breite
+	private static int res_b = 1024;
+
+	// getter und setter entsprechender variablen
+	public static int getRes_b() {
+		return res_b;
+	}
+
+	public static void setRes_b(int res_b) {
+		Menue.res_b = res_b;
+	}
+
+	public static int getRes_h() {
+		return res_h;
+	}
+
+	public static void setRes_h(int res_h) {
+		Menue.res_h = res_h;
+	}
 
 	static void prepareGUI() {
 		screen = new JFrame("Memory");
@@ -47,21 +69,29 @@ public class Menue {
 				// Schliesse Menue
 				screen.dispose();
 				// Starte Einzelspieler
-				Spiel.prepareGUI();	
+				// uebergebe aufloesung
+				Spiel.prepareGUI(res_b, res_h);	
 			}
 		});
 		
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Schliesse Applikation
+				screen.dispose();
 				System.exit(0);
 			}
 		});
 		btnCredits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Schliesse Applikation
-				credits.main(null);
+				// Oeffne credits
+				Credits.gui();
 			}
 		});
+		btnEinstellungen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Schliesse Applikation
+				Einstellungen.einstellungen();
+			}
+});
 	}
 }
