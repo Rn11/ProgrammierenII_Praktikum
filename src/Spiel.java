@@ -39,13 +39,13 @@ public class Spiel {
 		}
 	});
 
-	static void prepareGUI() {
+	static void prepareGUI(int h, int b) {
 
 		screen = new JFrame("Memory");
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// screengroesse 600x600
-		screen.setSize(1024, 768);
+		// screengroesse 1024, 768
+		screen.setSize(h, b);
 
 		// 2x2 Raster erstellen
 		screen.setLayout(new GridLayout(4, 4, 10, 10));

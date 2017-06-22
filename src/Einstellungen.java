@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class Einstellungen {
 
@@ -11,78 +13,86 @@ public class Einstellungen {
 		// Erstellung des Fensters "Einstellung"
 		JFrame eFenster = new JFrame("Einstellungen");
 		eFenster.setLayout(new GridBagLayout());
-		//Deklarierung von Button und Label
-		JLabel beschreibung = new JLabel("Memory Größe:");
-		JLabel groesse = new JLabel("Fenster Größe:");
-		JLabel funktion = new JLabel ("EINSTELLUNGEN WERDEN NOCH IMPLEMENTIERT");
-		JButton zurueck = new JButton ("Zurück");
-		
-		//Einstellung der Größe
-		eFenster.setSize(400, 400);
-		eFenster.setVisible(true);
-		eFenster.setLocationRelativeTo(null);
-		
-		//Erstellung des GridBagConstraints
+
+		// Erstellung des GridBagConstraints
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(1, 1, 1, 1);
 		c.gridx = 0;
 		c.gridy = 0;
 
-		//Implementierung des bildSliders
-		JSlider bildSlider = new JSlider();
-		c.gridx = 2;
-		c.gridy = 1;
-		c.gridwidth = 1;
-		bildSlider.setMinimum(2);
-		bildSlider.setMaximum(16);
-		bildSlider.setValue(2);
-		bildSlider.setPaintTicks(true);
-		eFenster.getContentPane().add(bildSlider, c);
-		
-		//Implementierung des größenSliders
+		// Implementierung des groessenSliders
 		JSlider groeßeSlider = new JSlider();
-		c.gridx = 2;
+		c.gridx = 0;
 		c.gridy = 3;
 		c.gridwidth = 1;
-		eFenster.getContentPane().add(beschreibung, c);
-		groeßeSlider.setMinimum(2);
-		groeßeSlider.setMaximum(16);
-		groeßeSlider.setValue(2);
+
+		groeßeSlider.setMinimum(300);
+		groeßeSlider.setMaximum(1290);
+		groeßeSlider.setValue(1024);
 		groeßeSlider.setPaintTicks(true);
 		eFenster.getContentPane().add(groeßeSlider, c);
-		
-		//positionierung des Labels "beschreibung"
-		c.gridx = 0;
-		c.gridy = 1;
-		eFenster.getContentPane().add(beschreibung, c);
-		beschreibung.setVisible(true);
-		
-		//positionierung des Labels "groesse"
-		c.gridx = 0;
-		c.gridy = 3;
-		eFenster.getContentPane().add(groesse, c);
-		groesse.setVisible(true);
-		
-		//positionierung des "zurueck button"
-		c.gridx = 1;
-		c.gridy = 6;
-		c.gridwidth = 2;
-		eFenster.getContentPane().add(zurueck, c);
-		zurueck.setVisible(true);
-		
+
+		// Deklarierung von Button und Label
+		JLabel txtBreite = new JLabel("Breite:");
+		JLabel txtHoehe = new JLabel("Höhe:");
+		JLabel txtValueB = new JLabel(String.valueOf(groeßeSlider.getValue()));
+		JLabel txtValueH = new JLabel(String.valueOf((groeßeSlider.getValue() / 4) * 3));
+		JButton btnZurueck = new JButton("Zurück");
+
+		// Einstellung der Größe
+		eFenster.setSize(400, 400);
+		eFenster.setVisible(true);
+		eFenster.setLocationRelativeTo(null);
+
+		// positionierung des Labels "Hoehe"
 		c.gridx = 0;
 		c.gridy = 0;
-		eFenster.getContentPane().add(funktion, c);
-		beschreibung.setVisible(true);
+		eFenster.getContentPane().add(txtHoehe, c);
 
-	//
-	//ActionListener für zurückButton
-	zurueck.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			// Schliesse Applikation
-			eFenster.dispose();
-		}
-	});
-}
+		// positionierung des Labels "Breite"
+		c.gridx = 0;
+		c.gridy = 1;
+		eFenster.getContentPane().add(txtBreite, c);
+
+		// positionierung des "zurueck button"
+		c.gridx = 0;
+		c.gridy = 4;
+		c.gridwidth = 1;
+		eFenster.getContentPane().add(btnZurueck, c);
+
+		// positionierung des labes "txtValueH" (hoehe)
+		c.gridx = 3;
+		c.gridy = 0;
+		eFenster.getContentPane().add(txtValueH, c);
+
+		// positionierung des labes "txtValueB" (breite)
+		c.gridx = 3;
+		c.gridy = 1;
+		eFenster.getContentPane().add(txtValueB, c);
+
+		//
+		// ActionListener für zurückButton
+		btnZurueck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Setze Aufloesung fuer das Spiel-Fenster
+				// setze breite
+				Menue.setRes_b(groeßeSlider.getValue());
+				// setze hoehe
+				Menue.setRes_h(((groeßeSlider.getValue() / 4) * 3));
+				// Schliesse Applikation
+				eFenster.dispose();
+			}
+		});
+
+		groeßeSlider.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				// passe labels an
+				txtValueB.setText(String.valueOf(groeßeSlider.getValue()));
+				txtValueH.setText(String.valueOf((groeßeSlider.getValue() / 4) * 3));
+			}
+		});
+
+	}
 }
