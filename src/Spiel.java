@@ -8,14 +8,28 @@ import javax.swing.*;
 
 public class Spiel {
 	static JFrame screen;
+	// ArrayList vom Typ file, beinhaltet die Pfade zu den Dateien zu den Bildern
+	// Wird benutzt, um Bilder zu vergleichen
 	static ArrayList<File> gemischt = new ArrayList<File>();
+	// ArrayList vom Typ JButton, beinhaltet alle JButtons
 	static ArrayList<JButton> buttons = new ArrayList<JButton>();
+	// ArrayList vom Typ ImageIcon, beinhaltet alle Bilder (zum Skalieren mithilfe einer for-Schleife)
+	static ArrayList<ImageIcon> bilder = new ArrayList<ImageIcon>();
+	// Zwischenspeicher für IDs
 	static int tmpID_a = 0;
 	static int tmpID_b = 0;
+	// Zaehlervariable fuer Klicks
 	static int klick = 0;
 	static String path = "";
-	public static Icon defaultIcon;
 
+	public static ArrayList<File> getGemischt() {
+		return gemischt;
+	}
+
+	public static void setGemischt(ArrayList<File> gemischt) {
+		Spiel.gemischt = gemischt;
+	}
+	
 	public static boolean checkCards(String path1, String path2) {
 
 		if (path1 == path2) {
@@ -39,42 +53,103 @@ public class Spiel {
 		}
 	});
 
-	static void prepareGUI() {
+	static void prepareGUI(int h, int b) {
 
 		screen = new JFrame("Memory");
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// screengroesse 600x600
-		screen.setSize(1024, 768);
+		// screengroesse 1024, 768
+		screen.setSize(h, b);
 
 		// 2x2 Raster erstellen
 		screen.setLayout(new GridLayout(4, 4, 10, 10));
 
+		// Mischen der Bilder
+		try {
+
+			gemischt = Mischen.mischen();
+
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		// Icons werden nun seperat angelegt, damit bei den action listenern die
+		// icons per Referenz manipuliert werden koennen
+		ImageIcon bild1 = new ImageIcon(gemischt.get(0).toString());
+		ImageIcon bild2 = new ImageIcon(gemischt.get(1).toString());
+		ImageIcon bild3 = new ImageIcon(gemischt.get(2).toString());
+		ImageIcon bild4 = new ImageIcon(gemischt.get(3).toString());
+		ImageIcon bild5 = new ImageIcon(gemischt.get(4).toString());
+		ImageIcon bild6 = new ImageIcon(gemischt.get(5).toString());
+		ImageIcon bild7 = new ImageIcon(gemischt.get(6).toString());
+		ImageIcon bild8 = new ImageIcon(gemischt.get(7).toString());
+		ImageIcon bild9 = new ImageIcon(gemischt.get(8).toString());
+		ImageIcon bild10 = new ImageIcon(gemischt.get(9).toString());
+		ImageIcon bild11 = new ImageIcon(gemischt.get(10).toString());
+		ImageIcon bild12 = new ImageIcon(gemischt.get(11).toString());
+		ImageIcon bild13 = new ImageIcon(gemischt.get(12).toString());
+		ImageIcon bild14 = new ImageIcon(gemischt.get(13).toString());
+		ImageIcon bild15 = new ImageIcon(gemischt.get(14).toString());
+		ImageIcon bild16 = new ImageIcon(gemischt.get(15).toString());
+		ImageIcon bild17 = new ImageIcon(gemischt.get(16).toString());
+		ImageIcon bild18 = new ImageIcon(gemischt.get(17).toString());
+		ImageIcon bild19 = new ImageIcon(gemischt.get(18).toString());
+		ImageIcon bild20 = new ImageIcon(gemischt.get(19).toString());
+		ImageIcon bild21 = new ImageIcon(gemischt.get(20).toString());
+		ImageIcon bild22 = new ImageIcon(gemischt.get(21).toString());
+		ImageIcon bild23 = new ImageIcon(gemischt.get(22).toString());
+		ImageIcon bild24 = new ImageIcon(gemischt.get(23).toString());
+		
+		bilder.add(bild1);
+		bilder.add(bild2);
+		bilder.add(bild3);
+		bilder.add(bild4);
+		bilder.add(bild5);
+		bilder.add(bild6);
+		bilder.add(bild7);
+		bilder.add(bild8);
+		bilder.add(bild9);
+		bilder.add(bild10);
+		bilder.add(bild11);
+		bilder.add(bild12);
+		bilder.add(bild13);
+		bilder.add(bild14);
+		bilder.add(bild15);
+		bilder.add(bild16);
+		bilder.add(bild17);
+		bilder.add(bild18);
+		bilder.add(bild19);
+		bilder.add(bild20);
+		bilder.add(bild21);
+		bilder.add(bild22);
+		bilder.add(bild23);
+		bilder.add(bild24);
+
 		// buttons erstellen
-		Button button1 = new Button(0);
-		Button button2 = new Button(1);
-		Button button3 = new Button(2);
-		Button button4 = new Button(3);
-		Button button5 = new Button(4);
-		Button button6 = new Button(5);
-		Button button7 = new Button(6);
-		Button button8 = new Button(7);
-		Button button9 = new Button(8);
-		Button button10 = new Button(9);
-		Button button11 = new Button(10);
-		Button button12 = new Button(11);
-		Button button13 = new Button(12);
-		Button button14 = new Button(13);
-		Button button15 = new Button(14);
-		Button button16 = new Button(15);
-		Button button17 = new Button(16);
-		Button button18 = new Button(17);
-		Button button19 = new Button(18);
-		Button button20 = new Button(19);
-		Button button21 = new Button(20);
-		Button button22 = new Button(21);
-		Button button23 = new Button(22);
-		Button button24 = new Button(23);
+		Button button1 = new Button(0, gemischt.get(0).toString());
+		Button button2 = new Button(1, gemischt.get(1).toString());
+		Button button3 = new Button(2, gemischt.get(2).toString());
+		Button button4 = new Button(3, gemischt.get(3).toString());
+		Button button5 = new Button(4, gemischt.get(4).toString());
+		Button button6 = new Button(5, gemischt.get(5).toString());
+		Button button7 = new Button(6, gemischt.get(6).toString());
+		Button button8 = new Button(7, gemischt.get(7).toString());
+		Button button9 = new Button(8, gemischt.get(8).toString());
+		Button button10 = new Button(9, gemischt.get(9).toString());
+		Button button11 = new Button(10, gemischt.get(10).toString());
+		Button button12 = new Button(11, gemischt.get(11).toString());
+		Button button13 = new Button(12, gemischt.get(12).toString());
+		Button button14 = new Button(13, gemischt.get(13).toString());
+		Button button15 = new Button(14, gemischt.get(14).toString());
+		Button button16 = new Button(15, gemischt.get(15).toString());
+		Button button17 = new Button(16, gemischt.get(16).toString());
+		Button button18 = new Button(17, gemischt.get(17).toString());
+		Button button19 = new Button(18, gemischt.get(18).toString());
+		Button button20 = new Button(19, gemischt.get(19).toString());
+		Button button21 = new Button(20, gemischt.get(20).toString());
+		Button button22 = new Button(21, gemischt.get(21).toString());
+		Button button23 = new Button(22, gemischt.get(22).toString());
+		Button button24 = new Button(23, gemischt.get(23).toString());
 
 		buttons.add(button1);
 		buttons.add(button2);
@@ -107,41 +182,6 @@ public class Spiel {
 		}
 
 		screen.setVisible(true);
-		try {
-
-			gemischt = Mischen.mischen();
-
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		// Icons werden nun seperat angelegt, damit bei den action listenern die
-		// icons per Referenz manipuliert werden koennen
-		ImageIcon bild1 = new ImageIcon(gemischt.get(0).toString());
-		ImageIcon bild2 = new ImageIcon(gemischt.get(1).toString());
-		ImageIcon bild3 = new ImageIcon(gemischt.get(2).toString());
-		ImageIcon bild4 = new ImageIcon(gemischt.get(3).toString());
-		ImageIcon bild5 = new ImageIcon(gemischt.get(4).toString());
-		ImageIcon bild6 = new ImageIcon(gemischt.get(5).toString());
-		ImageIcon bild7 = new ImageIcon(gemischt.get(6).toString());
-		ImageIcon bild8 = new ImageIcon(gemischt.get(7).toString());
-		ImageIcon bild9 = new ImageIcon(gemischt.get(8).toString());
-		ImageIcon bild10 = new ImageIcon(gemischt.get(9).toString());
-		ImageIcon bild11 = new ImageIcon(gemischt.get(10).toString());
-		ImageIcon bild12 = new ImageIcon(gemischt.get(11).toString());
-		ImageIcon bild13 = new ImageIcon(gemischt.get(12).toString());
-		ImageIcon bild14 = new ImageIcon(gemischt.get(13).toString());
-		ImageIcon bild15 = new ImageIcon(gemischt.get(14).toString());
-		ImageIcon bild16 = new ImageIcon(gemischt.get(15).toString());
-		ImageIcon bild17 = new ImageIcon(gemischt.get(16).toString());
-		ImageIcon bild18 = new ImageIcon(gemischt.get(17).toString());
-		ImageIcon bild19 = new ImageIcon(gemischt.get(18).toString());
-		ImageIcon bild20 = new ImageIcon(gemischt.get(19).toString());
-		ImageIcon bild21 = new ImageIcon(gemischt.get(20).toString());
-		ImageIcon bild22 = new ImageIcon(gemischt.get(21).toString());
-		ImageIcon bild23 = new ImageIcon(gemischt.get(22).toString());
-		ImageIcon bild24 = new ImageIcon(gemischt.get(23).toString());
 
 		// event listener
 		button1.addActionListener(new ActionListener() {
@@ -152,14 +192,14 @@ public class Spiel {
 				button1.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button1.path = gemischt.get(0).toString(), path)) {
-						tmpID_b = button1.id;
+					if (checkCards(button1.getPath(), path)) {
+						tmpID_b = button1.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button1.path = gemischt.get(0).toString();
-					tmpID_a = button1.id;
-					button1.setEnabled(false);
+					path = button1.getPath();
+					tmpID_a = button1.getId();
+					button1.setEnabled(true);
 				}
 			}
 		});
@@ -170,14 +210,14 @@ public class Spiel {
 				button2.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button2.path = gemischt.get(1).toString(), path)) {
-						tmpID_b = button2.id;
+					if (checkCards(button2.getPath(), path)) {
+						tmpID_b = button2.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button2.path = gemischt.get(1).toString();
-					tmpID_a = button2.id;
-					button2.setEnabled(false);
+					path = button2.getPath();
+					tmpID_a = button2.getId();
+					button2.setEnabled(true);
 				}
 			}
 		});
@@ -188,14 +228,14 @@ public class Spiel {
 				button3.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button3.path = gemischt.get(2).toString(), path)) {
-						tmpID_b = button3.id;
+					if (checkCards(button3.getPath(), path)) {
+						tmpID_b = button3.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button3.path = gemischt.get(2).toString();
-					tmpID_a = button3.id;
-					button3.setEnabled(false);
+					path = button3.getPath();
+					tmpID_a = button3.getId();
+					button3.setEnabled(true);
 				}
 			}
 		});
@@ -206,14 +246,14 @@ public class Spiel {
 				button4.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button4.path = gemischt.get(3).toString(), path)) {
-						tmpID_b = button4.id;
+					if (checkCards(button4.getPath(), path)) {
+						tmpID_b = button4.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button4.path = gemischt.get(3).toString();
-					tmpID_a = button4.id;
-					button4.setEnabled(false);
+					path = button4.getPath();
+					tmpID_a = button4.getId();
+					button4.setEnabled(true);
 				}
 			}
 		});
@@ -224,14 +264,14 @@ public class Spiel {
 				button5.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button5.path = gemischt.get(4).toString(), path)) {
-						tmpID_b = button5.id;
+					if (checkCards(button5.getPath(), path)) {
+						tmpID_b = button5.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button5.path = gemischt.get(4).toString();
-					tmpID_a = button5.id;
-					button5.setEnabled(false);
+					path = button5.getPath();
+					tmpID_a = button5.getId();
+					button5.setEnabled(true);
 				}
 			}
 		});
@@ -242,14 +282,14 @@ public class Spiel {
 				button6.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button6.path = gemischt.get(5).toString(), path)) {
-						tmpID_b = button6.id;
+					if (checkCards(button6.getPath(), path)) {
+						tmpID_b = button6.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button6.path = gemischt.get(5).toString();
-					tmpID_a = button6.id;
-					button6.setEnabled(false);
+					path = button6.getPath();
+					tmpID_a = button6.getId();
+					button6.setEnabled(true);
 				}
 			}
 		});
@@ -260,14 +300,14 @@ public class Spiel {
 				button7.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button7.path = gemischt.get(6).toString(), path)) {
-						tmpID_b = button7.id;
+					if (checkCards(button7.getPath(), path)) {
+						tmpID_b = button7.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button7.path = gemischt.get(6).toString();
-					tmpID_a = button7.id;
-					button7.setEnabled(false);
+					path = button7.getPath();
+					tmpID_a = button7.getId();
+					button7.setEnabled(true);
 				}
 			}
 		});
@@ -278,14 +318,14 @@ public class Spiel {
 				button8.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button8.path = gemischt.get(7).toString(), path)) {
-						tmpID_b = button8.id;
+					if (checkCards(button8.getPath(), path)) {
+						tmpID_b = button8.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button8.path = gemischt.get(7).toString();
-					tmpID_a = button8.id;
-					button8.setEnabled(false);
+					path = button8.getPath();
+					tmpID_a = button8.getId();
+					button8.setEnabled(true);
 				}
 
 			}
@@ -297,14 +337,14 @@ public class Spiel {
 				button9.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button9.path = gemischt.get(8).toString(), path)) {
-						tmpID_b = button9.id;
+					if (checkCards(button9.getPath(), path)) {
+						tmpID_b = button9.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button9.path = gemischt.get(8).toString();
-					tmpID_a = button9.id;
-					button9.setEnabled(false);
+					path = button9.getPath();
+					tmpID_a = button9.getId();
+					button9.setEnabled(true);
 				}
 			}
 		});
@@ -315,14 +355,14 @@ public class Spiel {
 				button10.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button10.path = gemischt.get(9).toString(), path)) {
-						tmpID_b = button10.id;
+					if (checkCards(button10.getPath(), path)) {
+						tmpID_b = button10.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button10.path = gemischt.get(9).toString();
-					tmpID_a = button10.id;
-					button10.setEnabled(false);
+					path = button10.getPath();
+					tmpID_a = button10.getId();
+					button10.setEnabled(true);
 				}
 			}
 		});
@@ -333,14 +373,14 @@ public class Spiel {
 				button11.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button11.path = gemischt.get(10).toString(), path)) {
-						tmpID_b = button11.id;
+					if (checkCards(button11.getPath(), path)) {
+						tmpID_b = button11.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button11.path = gemischt.get(10).toString();
-					tmpID_a = button11.id;
-					button11.setEnabled(false);
+					path = button11.getPath();
+					tmpID_a = button11.getId();
+					button11.setEnabled(true);
 				}
 			}
 
@@ -352,14 +392,14 @@ public class Spiel {
 				button12.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button12.path = gemischt.get(11).toString(), path)) {
-						tmpID_b = button12.id;
+					if (checkCards(button12.getPath(), path)) {
+						tmpID_b = button12.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button12.path = gemischt.get(11).toString();
-					tmpID_a = button12.id;
-					button12.setEnabled(false);
+					path = button12.getPath();
+					tmpID_a = button12.getId();
+					button12.setEnabled(true);
 				}
 			}
 		});
@@ -370,14 +410,14 @@ public class Spiel {
 				button13.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button13.path = gemischt.get(12).toString(), path)) {
-						tmpID_b = button13.id;
+					if (checkCards(button13.getPath(), path)) {
+						tmpID_b = button13.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button13.path = gemischt.get(12).toString();
-					tmpID_a = button13.id;
-					button13.setEnabled(false);
+					path = button13.getPath();
+					tmpID_a = button13.getId();
+					button13.setEnabled(true);
 				}
 
 			}
@@ -389,14 +429,14 @@ public class Spiel {
 				button14.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button14.path = gemischt.get(13).toString(), path)) {
-						tmpID_b = button14.id;
+					if (checkCards(button14.getPath(), path)) {
+						tmpID_b = button14.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button14.path = gemischt.get(13).toString();
-					tmpID_a = button14.id;
-					button14.setEnabled(false);
+					path = button14.getPath();
+					tmpID_a = button14.getId();
+					button14.setEnabled(true);
 				}
 			}
 		});
@@ -407,14 +447,14 @@ public class Spiel {
 				button15.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button15.path = gemischt.get(14).toString(), path)) {
-						tmpID_b = button15.id;
+					if (checkCards(button15.getPath(), path)) {
+						tmpID_b = button15.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button15.path = gemischt.get(14).toString();
-					tmpID_a = button15.id;
-					button15.setEnabled(false);
+					path = button15.getPath();
+					tmpID_a = button15.getId();
+					button15.setEnabled(true);
 				}
 			}
 		});
@@ -425,14 +465,14 @@ public class Spiel {
 				button16.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button16.path = gemischt.get(15).toString(), path)) {
-						tmpID_b = button16.id;
+					if (checkCards(button16.getPath(), path)) {
+						tmpID_b = button16.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button16.path = gemischt.get(15).toString();
-					tmpID_a = button16.id;
-					button16.setEnabled(false);
+					path = button16.getPath();
+					tmpID_a = button16.getId();
+					button16.setEnabled(true);
 				}
 			}
 		});
@@ -443,14 +483,14 @@ public class Spiel {
 				button17.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button17.path = gemischt.get(16).toString(), path)) {
-						tmpID_b = button17.id;
+					if (checkCards(button17.getPath(), path)) {
+						tmpID_b = button17.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button17.path = gemischt.get(16).toString();
-					tmpID_a = button17.id;
-					button17.setEnabled(false);
+					path = button17.getPath();
+					tmpID_a = button17.getId();
+					button17.setEnabled(true);
 				}
 			}
 		});
@@ -461,14 +501,14 @@ public class Spiel {
 				button18.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button18.path = gemischt.get(17).toString(), path)) {
-						tmpID_b = button18.id;
+					if (checkCards(button18.getPath(), path)) {
+						tmpID_b = button18.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button18.path = gemischt.get(6).toString();
-					tmpID_a = button18.id;
-					button18.setEnabled(false);
+					path = button18.getPath();
+					tmpID_a = button18.getId();
+					button18.setEnabled(true);
 				}
 			}
 		});
@@ -479,14 +519,14 @@ public class Spiel {
 				button19.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button19.path = gemischt.get(18).toString(), path)) {
-						tmpID_b = button19.id;
+					if (checkCards(button19.getPath(), path)) {
+						tmpID_b = button19.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button19.path = gemischt.get(18).toString();
-					tmpID_a = button19.id;
-					button19.setEnabled(false);
+					path = button19.getPath();
+					tmpID_a = button19.getId();
+					button19.setEnabled(true);
 				}
 			}
 		});
@@ -497,14 +537,14 @@ public class Spiel {
 				button20.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button20.path = gemischt.get(19).toString(), path)) {
-						tmpID_b = button20.id;
+					if (checkCards(button20.getPath(), path)) {
+						tmpID_b = button20.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button20.path = gemischt.get(19).toString();
-					tmpID_a = button20.id;
-					button20.setEnabled(false);
+					path = button20.getPath();
+					tmpID_a = button20.getId();
+					button20.setEnabled(true);
 				}
 			}
 		});
@@ -515,14 +555,14 @@ public class Spiel {
 				button21.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button21.path = gemischt.get(20).toString(), path)) {
-						tmpID_b = button21.id;
+					if (checkCards(button21.getPath(), path)) {
+						tmpID_b = button21.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button21.path = gemischt.get(20).toString();
-					tmpID_a = button21.id;
-					button21.setEnabled(false);
+					path = button21.getPath();
+					tmpID_a = button21.getId();
+					button21.setEnabled(true);
 				}
 			}
 		});
@@ -533,14 +573,14 @@ public class Spiel {
 				button22.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button22.path = gemischt.get(21).toString(), path)) {
-						tmpID_b = button22.id;
+					if (checkCards(button22.getPath(), path)) {
+						tmpID_b = button22.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button22.path = gemischt.get(21).toString();
-					tmpID_a = button22.id;
-					button22.setEnabled(false);
+					path = button22.getPath();
+					tmpID_a = button22.getId();
+					button22.setEnabled(true);
 				}
 			}
 		});
@@ -551,14 +591,14 @@ public class Spiel {
 				button23.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button23.path = gemischt.get(22).toString(), path)) {
-						tmpID_b = button23.id;
+					if (checkCards(button23.getPath(), path)) {
+						tmpID_b = button23.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button23.path = gemischt.get(22).toString();
-					tmpID_a = button23.id;
-					button23.setEnabled(false);
+					path = button23.getPath();
+					tmpID_a = button23.getId();
+					button23.setEnabled(true);
 				}
 			}
 		});
@@ -569,17 +609,34 @@ public class Spiel {
 				button24.setText("");
 				klick++;
 				if (klick == 2) {
-					if (checkCards(button24.path = gemischt.get(23).toString(), path)) {
-						tmpID_b = button24.id;
+					if (checkCards(button24.getPath(), path)) {
+						tmpID_b = button24.getId();
 						t.start();
 					}
 				} else if (klick == 1) {
-					path = button24.path = gemischt.get(23).toString();
-					tmpID_a = button24.id;
-					button24.setEnabled(false);
+					path = button24.getPath();
+					tmpID_a = button24.getId();
+					button24.setEnabled(true);
 				}
 			}
 		});
 
+		// ComponentListener welcher auf das Resize-Event reagiert
+		// Bilder werden nun beim aendern der Fenstergroesse skaliert
+		screen.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				// Ersetze das image mit einer skalierten Instanz des Bildes,
+				// dessen Groesse sich nach dem Button richtet
+				// Zu beachten ist hierbei, dass es egal ist, von welchem Button
+				// die Groesse abgefragt wird,
+				// da alle Buttons gleich gross sind
+				for (int i = 0; i < gemischt.size(); i++){
+					ImageIcon tmpIcon = new ImageIcon(gemischt.get(i).toString());
+					tmpIcon.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST);
+					bilder.set(i, tmpIcon);
+				}
+			}
+		});
 	}
 }
