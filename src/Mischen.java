@@ -4,7 +4,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Mischen {
@@ -35,11 +34,17 @@ public class Mischen {
 			eingelesen.add(eingelesen.get(i));
 		}
 
-		// Mische Eintraege
+		// Mische Eintraege solange "eingelesen" noch Elemente hat
 		while (0 < eingelesen.size()) {
+			// Generiere eine Zufallszahl zwischen 0 und der Groesse der
+			// "eingelesen" ArrayList
 			int random = rn.nextInt(eingelesen.size());
+			// Ein Eintrag aus "eingelesen" wird nun mit der Zufallszahl
+			// ausgelesen und zu gemischt hinzugefuegt
 			gemischt.add(eingelesen.get(random));
+			// Anschliessend wird dieser Eintrag aus "eingelesen" entfernt
 			eingelesen.remove(random);
+			// "eingelesen" wird gekuerzt
 			eingelesen.trimToSize();
 		}
 

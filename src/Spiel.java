@@ -7,28 +7,78 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class Spiel {
-	static JFrame screen;
-	// ArrayList vom Typ file, beinhaltet die Pfade zu den Dateien zu den Bildern
+	private static JFrame screen;
+	// ArrayList vom Typ file, beinhaltet die Pfade zu den Dateien zu den
+	// Bildern
 	// Wird benutzt, um Bilder zu vergleichen
-	static ArrayList<File> gemischt = new ArrayList<File>();
+	private static ArrayList<File> gemischt = new ArrayList<File>();
 	// ArrayList vom Typ JButton, beinhaltet alle JButtons
-	static ArrayList<JButton> buttons = new ArrayList<JButton>();
-	// ArrayList vom Typ ImageIcon, beinhaltet alle Bilder (zum Skalieren mithilfe einer for-Schleife)
-	static ArrayList<ImageIcon> bilder = new ArrayList<ImageIcon>();
+	private static ArrayList<JButton> buttons = new ArrayList<JButton>();
+	// ArrayList vom Typ ImageIcon, beinhaltet alle Bilder (zum Skalieren
+	// mithilfe einer for-Schleife)
+	private static ArrayList<ImageIcon> bilder = new ArrayList<ImageIcon>();
 	// Zwischenspeicher für IDs
-	static int tmpID_a = 0;
-	static int tmpID_b = 0;
+	private static int tmpID_a = 0;
+	private static int tmpID_b = 0;
+	private static String path = "";
 	// Zaehlervariable fuer Klicks
-	static int klick = 0;
-	static String path = "";
+	private static int klick = 0;
 
+	// Getter & Setter fuer klick
+	public static int getKlick() {
+		return klick;
+	}
+
+	public static void setKlick(int klick) {
+		Spiel.klick = klick;
+	}
+
+	// Getter & Setter fuer die gemischten Pfade der Bilder
+	public static ArrayList<File> getGemischt() {
+		return gemischt;
+	}
+
+	public static void setGemischt(ArrayList<File> gemischt) {
+		Spiel.gemischt = gemischt;
+	}
+
+	// Getter & Setter fuer path
+	public static String getPath() {
+		return path;
+	}
+
+	public static void setPath(String path) {
+		Spiel.path = path;
+	}
+
+	// Getter & Setter fuer tmpIDs
+	public static int getTmpID_a() {
+		return tmpID_a;
+	}
+
+	public static void setTmpID_a(int tmpID_a) {
+		Spiel.tmpID_a = tmpID_a;
+	}
+
+	public static int getTmpID_b() {
+		return tmpID_b;
+	}
+
+	public static void setTmpID_b(int tmpID_b) {
+		Spiel.tmpID_b = tmpID_b;
+	}
+
+	// Logik-Bereich
+
+	// Pruefung, ob 2 Buttons das gleiche Bild haben
 	public static boolean checkCards(String path1, String path2) {
-
 		if (path1 == path2) {
 			System.out.println("Ein Päärchen, schön!");
 			klick = 0;
 		} else {
+			// Wenn 2 unterschiedliche Bilder
 			klick = 0;
+			// Wartezeit bis Buttons "umgedreht" werden
 			t.start();
 			return true;
 		}
@@ -91,7 +141,7 @@ public class Spiel {
 		ImageIcon bild22 = new ImageIcon(gemischt.get(21).toString());
 		ImageIcon bild23 = new ImageIcon(gemischt.get(22).toString());
 		ImageIcon bild24 = new ImageIcon(gemischt.get(23).toString());
-		
+
 		bilder.add(bild1);
 		bilder.add(bild2);
 		bilder.add(bild3);
@@ -179,437 +229,145 @@ public class Spiel {
 		button1.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				button1.setIcon(bild1);
-
-				button1.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button1.getPath(), path)) {
-						tmpID_b = button1.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button1.getPath();
-					tmpID_a = button1.getId();
-					button1.setEnabled(true);
-				}
+				button1.klick(bild1);
 			}
 		});
 
 		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button2.setIcon(bild2);
-				button2.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button2.getPath(), path)) {
-						tmpID_b = button2.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button2.getPath();
-					tmpID_a = button2.getId();
-					button2.setEnabled(true);
-				}
+				button2.klick(bild2);
 			}
 		});
 
 		button3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button3.setIcon(bild3);
-				button3.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button3.getPath(), path)) {
-						tmpID_b = button3.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button3.getPath();
-					tmpID_a = button3.getId();
-					button3.setEnabled(true);
-				}
+				button3.klick(bild3);
 			}
 		});
 
 		button4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button4.setIcon(bild4);
-				button4.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button4.getPath(), path)) {
-						tmpID_b = button4.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button4.getPath();
-					tmpID_a = button4.getId();
-					button4.setEnabled(true);
-				}
+				button4.klick(bild4);
 			}
 		});
 
 		button5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button5.setIcon(bild5);
-				button5.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button5.getPath(), path)) {
-						tmpID_b = button5.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button5.getPath();
-					tmpID_a = button5.getId();
-					button5.setEnabled(true);
-				}
+				button5.klick(bild5);
 			}
 		});
 
 		button6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button6.setIcon(bild6);
-				button6.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button6.getPath(), path)) {
-						tmpID_b = button6.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button6.getPath();
-					tmpID_a = button6.getId();
-					button6.setEnabled(true);
-				}
+				button6.klick(bild6);
 			}
 		});
 
 		button7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button7.setIcon(bild7);
-				button7.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button7.getPath(), path)) {
-						tmpID_b = button7.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button7.getPath();
-					tmpID_a = button7.getId();
-					button7.setEnabled(true);
-				}
+				button7.klick(bild7);
 			}
 		});
 
 		button8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button8.setIcon(bild8);
-				button8.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button8.getPath(), path)) {
-						tmpID_b = button8.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button8.getPath();
-					tmpID_a = button8.getId();
-					button8.setEnabled(true);
-				}
-
+				button8.klick(bild8);
 			}
 		});
 
 		button9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button9.setIcon(bild9);
-				button9.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button9.getPath(), path)) {
-						tmpID_b = button9.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button9.getPath();
-					tmpID_a = button9.getId();
-					button9.setEnabled(true);
-				}
+				button9.klick(bild9);
 			}
 		});
 
 		button10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button10.setIcon(bild10);
-				button10.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button10.getPath(), path)) {
-						tmpID_b = button10.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button10.getPath();
-					tmpID_a = button10.getId();
-					button10.setEnabled(true);
-				}
+				button10.klick(bild10);
 			}
 		});
 
 		button11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button11.setIcon(bild11);
-				button11.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button11.getPath(), path)) {
-						tmpID_b = button11.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button11.getPath();
-					tmpID_a = button11.getId();
-					button11.setEnabled(true);
-				}
+				button11.klick(bild11);
 			}
-
 		});
 
 		button12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button12.setIcon(bild12);
-				button12.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button12.getPath(), path)) {
-						tmpID_b = button12.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button12.getPath();
-					tmpID_a = button12.getId();
-					button12.setEnabled(true);
-				}
+				button12.klick(bild12);
 			}
 		});
 
 		button13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button13.setIcon(bild13);
-				button13.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button13.getPath(), path)) {
-						tmpID_b = button13.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button13.getPath();
-					tmpID_a = button13.getId();
-					button13.setEnabled(true);
-				}
-
+				button13.klick(bild13);
 			}
 		});
 
 		button14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button14.setIcon(bild14);
-				button14.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button14.getPath(), path)) {
-						tmpID_b = button14.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button14.getPath();
-					tmpID_a = button14.getId();
-					button14.setEnabled(true);
-				}
+				button14.klick(bild14);
 			}
 		});
 
 		button15.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button15.setIcon(bild15);
-				button15.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button15.getPath(), path)) {
-						tmpID_b = button15.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button15.getPath();
-					tmpID_a = button15.getId();
-					button15.setEnabled(true);
-				}
+				button15.klick(bild15);
 			}
 		});
 
 		button16.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button16.setIcon(bild16);
-				button16.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button16.getPath(), path)) {
-						tmpID_b = button16.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button16.getPath();
-					tmpID_a = button16.getId();
-					button16.setEnabled(true);
-				}
+				button16.klick(bild16);
 			}
 		});
 
 		button17.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button17.setIcon(bild17);
-				button17.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button17.getPath(), path)) {
-						tmpID_b = button17.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button17.getPath();
-					tmpID_a = button17.getId();
-					button17.setEnabled(true);
-				}
+				button17.klick(bild17);
 			}
 		});
 
 		button18.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button18.setIcon(bild18);
-				button18.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button18.getPath(), path)) {
-						tmpID_b = button18.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button18.getPath();
-					tmpID_a = button18.getId();
-					button18.setEnabled(true);
-				}
+				button18.klick(bild18);
 			}
 		});
 
 		button19.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button19.setIcon(bild19);
-				button19.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button19.getPath(), path)) {
-						tmpID_b = button19.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button19.getPath();
-					tmpID_a = button19.getId();
-					button19.setEnabled(true);
-				}
+				button19.klick(bild19);
 			}
 		});
 
 		button20.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button20.setIcon(bild20);
-				button20.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button20.getPath(), path)) {
-						tmpID_b = button20.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button20.getPath();
-					tmpID_a = button20.getId();
-					button20.setEnabled(true);
-				}
+				button20.klick(bild20);
 			}
 		});
 
 		button21.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button21.setIcon(bild21);
-				button21.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button21.getPath(), path)) {
-						tmpID_b = button21.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button21.getPath();
-					tmpID_a = button21.getId();
-					button21.setEnabled(true);
-				}
+				button21.klick(bild21);
 			}
 		});
 
 		button22.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button22.setIcon(bild22);
-				button22.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button22.getPath(), path)) {
-						tmpID_b = button22.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button22.getPath();
-					tmpID_a = button22.getId();
-					button22.setEnabled(true);
-				}
+				button22.klick(bild22);
 			}
 		});
 
 		button23.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button23.setIcon(bild23);
-				button23.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button23.getPath(), path)) {
-						tmpID_b = button23.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button23.getPath();
-					tmpID_a = button23.getId();
-					button23.setEnabled(true);
-				}
+				button23.klick(bild23);
 			}
 		});
 
 		button24.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				button24.setIcon(bild24);
-				button24.setText("");
-				klick++;
-				if (klick == 2) {
-					if (checkCards(button24.getPath(), path)) {
-						tmpID_b = button24.getId();
-						t.start();
-					}
-				} else if (klick == 1) {
-					path = button24.getPath();
-					tmpID_a = button24.getId();
-					button24.setEnabled(true);
-				}
+				button24.klick(bilder.get(23));
 			}
 		});
 
@@ -623,9 +381,13 @@ public class Spiel {
 				// Zu beachten ist hierbei, dass es egal ist, von welchem Button
 				// die Groesse abgefragt wird,
 				// da alle Buttons gleich gross sind
-				for (int i = 0; i < gemischt.size(); i++){
+				for (int i = 0; i < gemischt.size(); i++) {
 					ImageIcon tmpIcon = new ImageIcon(gemischt.get(i).toString());
 					tmpIcon.getImage().getScaledInstance(button1.getHeight(), button1.getWidth(), Image.SCALE_FAST);
+
+					if (buttons.get(i).getIcon() != null) {
+						buttons.get(i).setIcon(tmpIcon);
+					}
 					bilder.set(i, tmpIcon);
 				}
 			}

@@ -33,6 +33,7 @@ public class Menue {
 		Menue.res_h = res_h;
 	}
 
+	// Methode, welches das GUI erstellt
 	static void prepareGUI() {
 		screen = new JFrame("Memory");
 		screen.setLocationRelativeTo(null);
@@ -40,6 +41,7 @@ public class Menue {
 		screen.setSize(450, 450);
 		screen.setLayout(new GridBagLayout());
 
+		// Buttons des Menues
 		JButton btnEinzelspieler = new JButton("Einzelspieler");
 		JButton btnMehrspieler = new JButton("Mehrspieler");
 		JButton btnCredits = new JButton("Credits");
@@ -61,9 +63,11 @@ public class Menue {
 		screen.getContentPane().add(btnCredits, c);
 		c.gridy =4;
 		screen.getContentPane().add(btnExit, c);
+		btnMehrspieler.setEnabled(false);
 		screen.setVisible(true);
 
 
+		// Action-Listener		
 		btnEinzelspieler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Schliesse Menue
