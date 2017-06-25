@@ -8,6 +8,7 @@ public class Client {
 	private Client() {
 	}
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 
 		String host = (args.length < 1) ? null : args[0];

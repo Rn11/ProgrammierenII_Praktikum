@@ -38,6 +38,8 @@ public class Button extends JButton {
 		this.path = path;
 	}
 
+	// Methode welche im ActionListener jedes Button aufgerufen wird. Dieser
+	// Teil beinhaltet die Funktionalitaet der Buttons
 	public void klick(ImageIcon ic) {
 		this.setIcon(ic);
 		this.setText("");

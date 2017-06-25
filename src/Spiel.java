@@ -23,7 +23,6 @@ public class Spiel {
 	private static String path = "";
 	// Zaehlervariable fuer Klicks
 	private static int klick = 0;
-	private static int resized = 0;
 
 	// Getter & Setter fuer klick
 	public static int getKlick() {

@@ -29,7 +29,6 @@ public class Server implements MemoryInterface {
 			Registry registry = LocateRegistry.getRegistry();
 			// Stub wird in der registry gebindet
 			registry.bind("Bilder", stub);
-
 			System.err.println("Server ready");
 		} catch (Exception e) {
 			System.err.println("Server exception: " + e.toString());
