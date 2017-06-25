@@ -1,3 +1,5 @@
+package GUI;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -6,14 +8,16 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import Logik.Mischen;
+
 public class Spiel {
 	private static JFrame screen;
 	// ArrayList vom Typ file, beinhaltet die Pfade zu den Dateien zu den
 	// Bildern
 	// Wird benutzt, um Bilder zu vergleichen
 	private static ArrayList<File> gemischt = new ArrayList<File>();
-	// ArrayList vom Typ JButton, beinhaltet alle JButtons
-	private static ArrayList<JButton> buttons = new ArrayList<JButton>();
+	// ArrayList vom Typ Button, beinhaltet alle Buttons
+	private static ArrayList<Button> buttons = new ArrayList<Button>();
 	// ArrayList vom Typ ImageIcon, beinhaltet alle Bilder (zum Skalieren
 	// mithilfe einer for-Schleife)
 	private static ArrayList<ImageIcon> bilder = new ArrayList<ImageIcon>();
@@ -68,32 +72,21 @@ public class Spiel {
 		Spiel.tmpID_b = tmpID_b;
 	}
 
-	// Logik-Bereich
-
-	// Pruefung, ob 2 Buttons das gleiche Bild haben
-	public static boolean checkCards(String path1, String path2) {
-		if (path1 == path2) {
-			System.out.println("Ein Päärchen, schön!");
-			klick = 0;
-		} else {
-			// Wenn 2 unterschiedliche Bilder
-			klick = 0;
-			// Wartezeit bis Buttons "umgedreht" werden
-			t.start();
-			return true;
-		}
-		return false;
+	public static ArrayList<Button> getButtons() {
+		return buttons;
 	}
 
-	static Timer t = new Timer(750, new ActionListener() {
-		public void actionPerformed(ActionEvent ae) {
-			System.out.println("Pech gehabt...");
-			buttons.get(tmpID_a).setIcon(null);
-			buttons.get(tmpID_b).setIcon(null);
-			buttons.get(tmpID_a).setEnabled(true);
-			t.stop();
-		}
-	});
+	public static void setButtons(ArrayList<Button> buttons) {
+		Spiel.buttons = buttons;
+	}
+
+	public static ArrayList<ImageIcon> getBilder() {
+		return bilder;
+	}
+
+	public static void setBilder(ArrayList<ImageIcon> bilder) {
+		Spiel.bilder = bilder;
+	}
 
 	static void prepareGUI(int h, int b) {
 
@@ -224,6 +217,7 @@ public class Spiel {
 		}
 
 		screen.setVisible(true);
+
 
 		// event listener
 		button1.addActionListener(new ActionListener() {

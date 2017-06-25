@@ -1,5 +1,8 @@
+package GUI;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
+import Logik.Logik;
 
 @SuppressWarnings("serial")
 // Klasse fuer Buttons
@@ -36,6 +39,7 @@ public class Button extends JButton {
 	public Button(int id, String path) {
 		this.id = id;
 		this.path = path;
+		//this.setDisabledIcon(this.getIcon());
 	}
 
 	// Methode welche im ActionListener jedes Button aufgerufen wird. Dieser
@@ -45,9 +49,8 @@ public class Button extends JButton {
 		this.setText("");
 		Spiel.setKlick(Spiel.getKlick() + 1);
 		if (Spiel.getKlick() == 2) {
-			if (Spiel.checkCards(this.getPath(), Spiel.getPath())) {
+			if (Logik.checkCards(this.getPath(), Spiel.getPath())) {
 				Spiel.setTmpID_b(this.getId());
-				Spiel.t.start();
 			}
 		} else if (Spiel.getKlick() == 1) {
 			Spiel.setPath(this.getPath());

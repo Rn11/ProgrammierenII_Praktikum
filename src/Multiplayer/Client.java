@@ -1,7 +1,10 @@
+package Multiplayer;
 import java.io.File;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
+
+import GUI.Spiel;
 
 public class Client {
 
